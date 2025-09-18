@@ -72,9 +72,9 @@ int main() {
     cout << "\nEnter second time:" << endl;
     t2.getdata();
 
-    t3 = t1 + t2;  // operator+ overloading
+    t3 = t1 + t2;  
 
-    t1++;          // operator++ overloading
+    t1++;          
 
     cout << "\nResults:" << endl;
     cout << "t3 after addition: "; 
