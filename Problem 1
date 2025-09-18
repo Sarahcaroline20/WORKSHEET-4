@@ -7,7 +7,7 @@ private:
     float imag;
 
 public:
-    // Default constructor
+
     Complex() {
         real = 0;
         imag = 0;
