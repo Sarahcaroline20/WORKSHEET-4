@@ -1,0 +1,87 @@
+#include <iostream>
+using namespace std;
+
+class Time {
+private:
+    int hr, min, sec;
+
+public:
+  
+    Time() {
+        hr = min = sec = 0;
+    }
+
+    
+    Time(int h, int m, int s) {
+        hr = h;
+        min = m;
+        sec = s;
+        normalize();
+    }
+
+    void getdata() {
+        cout << "Enter hours: ";
+        cin >> hr;
+        cout << "Enter minutes: ";
+        cin >> min;
+        cout << "Enter seconds: ";
+        cin >> sec;
+        normalize();
+    }
+
+  
+    void showdata() {
+        cout << "Time = " << hr << " hr " << min << " min " << sec << " sec" << endl;
+    }
+
+    void normalize() {
+        if (sec >= 60) {
+            min += sec / 60;
+            sec = sec % 60;
+        }
+        if (min >= 60) {
+            hr += min / 60;
+            min = min % 60;
+        }
+    }
+
+    Time operator+(Time t) {
+        Time temp;
+        temp.sec = sec + t.sec;
+        temp.min = min + t.min;
+        temp.hr = hr + t.hr;
+        temp.normalize();
+        return temp;
+    }
+
+    
+    Time operator++(int) {
+        Time temp = *this; 
+        sec++;
+        normalize();
+        return temp;        
+    }
+};
+
+int main() {
+    Time t1, t2, t3;
+
+    cout << "\nEnter first time:" << endl;
+    t1.getdata();
+
+    cout << "\nEnter second time:" << endl;
+    t2.getdata();
+
+    t3 = t1 + t2;  // operator+ overloading
+
+    t1++;          // operator++ overloading
+
+    cout << "\nResults:" << endl;
+    cout << "t3 after addition: "; 
+    t3.showdata();
+
+    cout << "t1 after increment: "; 
+    t1.showdata();
+
+    return 0;
+}
