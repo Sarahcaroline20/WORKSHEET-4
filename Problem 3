@@ -1,0 +1,85 @@
+#include <iostream>
+using namespace std;
+
+class DB;
+
+class DM {
+private:
+    int meter;
+    int cm;
+
+public:
+    DM() {
+        meter = cm = 0;
+    }
+
+    void getdata() {
+        cout << "Enter distance in meters: ";
+        cin >> meter;
+        cout << "Enter distance in centimeters: ";
+        cin >> cm;
+    }
+
+    void showdata() {
+        cout << "Distance = " << meter << " meters " << cm << " cm" << endl;
+    }
+
+    friend DM add(DM d1, DB d2); 
+};
+
+class DB {
+private:
+    int feet;
+    int inch;
+
+public:
+    DB() {
+        feet = inch = 0;
+    }
+
+    void getdata() {
+        cout << "Enter distance in feet: ";
+        cin >> feet;
+        cout << "Enter distance in inches: ";
+        cin >> inch;
+    }
+
+    void showdata() {
+        cout << "Distance = " << feet << " feet " << inch << " inches" << endl;
+    }
+
+    friend DM add(DM d1, DB d2);
+};
+
+DM add(DM d1, DB d2) {
+    DM temp;
+
+
+    int total_cm = d1.meter * 100 + d1.cm;
+
+    float db_cm = (d2.feet * 30.48) + (d2.inch * 2.54);
+
+    total_cm += db_cm;
+
+    temp.meter = total_cm / 100;
+    temp.cm = total_cm % 100;
+
+    return temp;
+}
+int main() {
+    DM d1, result;
+    DB d2;
+
+    cout << "\nEnter distance in meters and cm:" << endl;
+    d1.getdata();
+
+    cout << "\nEnter distance in feet and inches:" << endl;
+    d2.getdata();
+
+    result = add(d1, d2);
+
+    cout << "\nAfter Addition (in Meters & Centimeters):" << endl;
+    result.showdata();
+
+    return 0;
+}
